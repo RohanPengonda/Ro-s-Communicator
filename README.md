@@ -17,6 +17,7 @@ The app is branded **AI Communicator** in the UI.
 - [Scripts](#scripts)
 - [Architecture](#architecture)
   - [Project Layout](#project-layout)
+  - [UI Layer](#ui-layer)
   - [Backend API](#backend-api)
   - [Database Schema](#database-schema)
   - [Training Modes](#training-modes)
@@ -55,6 +56,11 @@ The app is branded **AI Communicator** in the UI.
 | `@vitejs/plugin-react` | ^6.1.1 | React transform (Oxc-based, no SWC) |
 | `tailwindcss` | ^4.3.3 | Styling (v4 CSS-first `@theme` config) |
 | `recharts` | ^3.10.1 | Score-trajectory area chart |
+| `@base-ui/react` | ^1.8.0 | Unstyled primitives behind every `components/ui/` component |
+| `class-variance-authority` | ^0.7.1 | Variant maps for `button`, `badge`, `alert`, `tabs`, `empty`, `field` |
+| `cn` | ^0.4.0 | Class-name merge helper — the one actually imported by the UI layer |
+| `clsx` / `tailwind-merge` | ^2.1.1 / ^3.7.0 | Only reachable through the orphaned `src/lib/utils.ts` (see below) |
+| `tw-animate-css` | ^1.4.0 | shadcn keyframe/animation utilities, imported by `src/index.css:2` |
 | `lucide-react` | ^1.48.0 | Icon set |
 | `typescript` | ~6.0.2 | Type checking |
 
@@ -63,12 +69,14 @@ The app is branded **AI Communicator** in the UI.
 | Package | Version | Purpose |
 | --- | --- | --- |
 | `express` | ^5.2.1 | HTTP API |
-| `better-sqlite3` | ^13.0.3 | Local persistence |
+| `better-sqlite3` | ^12.11.1 | Local persistence |
 | `cors` | ^2.8.6 | Cross-origin access for the Vite dev server |
+| `dotenv` | ^18.0.4 | Loads `.env` into `process.env` for the server (`server/index.ts:6`) |
 | `tsx` | ^4.23.15 | Runs the TypeScript server without a build step |
 | `@google/genai` | ^2.24.0 | Gemini client |
 
-**Tooling:** `oxlint` (not ESLint), `postcss` + `autoprefixer`.
+**Tooling:** `oxlint` (not ESLint), the `shadcn` CLI (for adding `components/ui/` primitives), and
+`@tailwindcss/postcss` + `autoprefixer` (`postcss.config.js`).
 
 ---
 
@@ -103,7 +111,7 @@ Open **http://localhost:5173**.
 `evaluateSession()` only calls Gemini when `VITE_GEMINI_API_KEY` is set. If it is missing — or the
 call fails for any reason — the app falls back to `generateIntelligentMockEvaluation()`, a local
 heuristic engine that counts filler words via regex, computes words-per-minute, and applies
-mode-specific score nudges (`src/services/aiCoachService.ts:34`).
+mode-specific score nudges (`src/services/aiCoachService.ts:118`).
 
 The backend is also optional. `src/services/api.ts` ships a complete local fallback dataset for every
 endpoint, so the UI is fully browsable with `npm run server` stopped. In that state nothing is
@@ -132,7 +140,7 @@ PORT=3001
 | Variable | Required | Read by | Notes |
 | --- | --- | --- | --- |
 | `VITE_GEMINI_API_KEY` | No | `src/services/aiCoachService.ts:12` | The only variable that actually works. Vite inlines `VITE_*` vars into the browser bundle. |
-| `PORT` | No | `server/index.ts:9` | Backend port. Defaults to `3001`. |
+| `PORT` | No | `server/index.ts:9` | Backend port. Defaults to `3001`. Loaded by `dotenv.config()` at `server/index.ts:6`. |
 | `GEMINI_API_KEY` | No | — | **Unused.** The `process.env` fallback in `aiCoachService.ts:12` is guarded by `typeof process !== 'undefined'`, which is always false in a browser bundle, so it resolves to `''`. The Express server never reads it. |
 
 > ⚠️ **Security note:** because Gemini is called from the browser, `VITE_GEMINI_API_KEY` is shipped
@@ -181,26 +189,59 @@ the index with `git rm --cached .env` and rotate the exposed key.
 ├── src/
 │   ├── main.tsx               # React entry
 │   ├── App.tsx                # Root component; all app state lives here
+│   ├── App.css                # DEAD — nothing imports it
+│   ├── index.css              # Tailwind v4 entry: @import, @theme, CSS variables
+│   ├── assets/                # Static assets
 │   ├── types/index.ts         # TrainingMode, CommunicationMetrics, Session, UserProfile, ...
+│   ├── lib/utils.ts           # DEAD — the conventional cn() helper, never imported
 │   ├── services/
 │   │   ├── api.ts             # API client (hardcoded base URL + local fallbacks)
 │   │   ├── aiCoachService.ts  # Gemini call + heuristic fallback engine
 │   │   └── speechService.ts   # SpeechTracker: Web Speech API + Web Audio volume meter
-│   └── components/
-│       ├── layout/Navbar.tsx
-│       ├── dashboard/Dashboard.tsx
-│       ├── modes/             # ModesHub + 8 mode components
-│       ├── analytics/         # GitHubHeatmap, MonthlyJourney, PersonalProfile
-│       ├── storybank/StoryBank.tsx
-│       └── session/           # SessionComplete, SessionReplayPlayer
+│   ├── components/
+│   │   ├── ui/                # 20 shadcn primitives on Base UI — button, card, dialog,
+│   │   │                      # tabs, tooltip, slider, field, ... (2 unused: field, button-group)
+│   │   ├── layout/Navbar.tsx
+│   │   ├── dashboard/Dashboard.tsx
+│   │   ├── modes/             # ModesHub + 8 mode components
+│   │   ├── analytics/         # GitHubHeatmap, MonthlyJourney, PersonalProfile
+│   │   ├── storybank/StoryBank.tsx
+│   │   └── session/           # SessionComplete, SessionReplayPlayer
+├── components.json            # shadcn CLI config ("base-nova" style, lucide icons)
+├── opencode.json              # Registers the shadcn MCP server for opencode
+├── postcss.config.js          # @tailwindcss/postcss + autoprefixer
 ├── index.html
-├── vite.config.ts             # plugins only — no proxy, no port override
-└── tailwind.config.js         # legacy; the v4 @theme block in src/index.css is authoritative
+├── vite.config.ts             # React plugin + the `@` -> ./src alias; no proxy, no port override
+└── tailwind.config.js         # legacy; the @theme blocks in src/index.css are authoritative
 ```
 
 **No router.** `src/App.tsx` is a single component holding state; navigation is a
-`useState<ActiveTab>` string union defined in `Navbar.tsx:14`. There is also no Redux, Zustand, or
+`useState<ActiveTab>` string union defined in `Navbar.tsx:16`. There is also no Redux, Zustand, or
 Context — just lifted `useState` hooks.
+
+The union has 7 members but `NAV_ITEMS` (`Navbar.tsx:33-40`) renders only 6: `'CONFIDENCE'` has no
+nav button and no branch in `App.tsx`.
+
+### UI Layer
+
+The interface is built on **shadcn/ui** in the `base-nova` style (`components.json:3`), which means the
+primitives are vendored source in `src/components/ui/` rather than an npm package. They sit on
+unstyled **Base UI** (`@base-ui/react`) and style with Tailwind utilities.
+
+There are 20 primitives, and 18 of them are genuinely used:
+
+| Used most | Consumers |
+| --- | --- |
+| `button` | 14 |
+| `badge` | 13 |
+| `card` | 8 |
+| `separator` | 6 |
+| `alert`, `dialog`, `input`, `progress` | 2 each |
+| `avatar`, `empty`, `label`, `scroll-area`, `skeleton`, `slider`, `spinner`, `tabs`, `textarea`, `tooltip` | 1 each |
+| **`field`, `button-group`** | **0 — unused scaffolding** |
+
+Add new primitives with the CLI: `npx shadcn@latest add <component>`. `opencode.json` also registers
+the shadcn MCP server so the components are discoverable from the editor.
 
 ### Backend API
 
@@ -314,7 +355,7 @@ Derived in-browser: filler-word count via regex
 
 ## Development Notes
 
-**Current charts.** Only one Recharts usage exists: a single `AreaChart` in `MonthlyJourney.tsx:4`
+**Current charts.** Only one Recharts usage exists: a single `AreaChart` in `MonthlyJourney.tsx:9`
 plotting overall score vs. storytelling score. Everything else that looks like a chart is hand-built
 CSS — the heatmap is a 154-cell CSS grid, and volume/pace/score indicators are divs.
 
@@ -327,8 +368,18 @@ CORS is fully open on the Express server. If you change the backend port, update
 type-checked by `npm run build` and only ever runs through `tsx`, which strips types without
 checking them.
 
-**Tailwind v4.** Configuration lives in the `@theme` block in `src/index.css:3`. `tailwind.config.js`
-still exists and defines identical values, but without a `@config` directive it is not loaded.
+A `@/* -> ./src/*` alias is declared in three places — `tsconfig.json:3`, `tsconfig.app.json:18`,
+and `vite.config.ts:8` — and `components.json:15-21` declares the shadcn aliases on top of that.
+**None of them are used.** Every import in the codebase is relative (`'../ui/button'`,
+`'../../types'`), including the UI primitives.
+
+**Tailwind v4.** `src/index.css` holds two theme blocks: `@theme inline` (line 6) maps the shadcn
+CSS variables onto Tailwind color names, and `@theme` (line 35) defines the project palette. Line 2
+imports `tw-animate-css` for the shadcn animation utilities. `tailwind.config.js` still exists but
+has no `@config` directive, so it is **not** loaded — and it has drifted out of sync anyway: it
+still declares the old emerald/slate palette, while `index.css:62` remaps `--color-emerald-500` to
+violet and lines 39-40 flip `--color-surface-900` to white. The CSS is authoritative; the JS config
+is dead weight.
 
 **Linting.** Oxlint, not ESLint. Type-aware rules are not enabled; to turn them on, install
 `oxlint-tsgolint` and set `options.typeAware` in `.oxlintrc.json`.
@@ -336,15 +387,21 @@ still exists and defines identical values, but without a `@config` directive it 
 **Known hardcoded demo values** — useful to know before you trust a number on screen:
 
 - The date `2026-09-27` is pinned in three places: `server/db.ts:203`, `src/services/api.ts:48`, and
-  `src/components/analytics/GitHubHeatmap.tsx:19`. The heatmap is a fixed window, not a rolling one.
+  `src/components/analytics/GitHubHeatmap.tsx:31`. The heatmap is a fixed window, not a rolling one.
+  Related dates are pinned too: `2026-09-26` and `2026-09-24` (story timestamps, twice each) and
+  `2026-09-27T18:30:00Z` (demo session).
 - Dashboard "Monthly Progress +0.8" and "↑ Storytelling +18%" are literal strings
-  (`Dashboard.tsx:88`).
+  (`Dashboard.tsx:100-101`).
 - `DELETE /api/sessions/:id` exists server-side and `api.deleteSession` is defined client-side, but
   nothing in the UI calls it.
 - The replay player's play/pause toggle is cosmetic — no audio is stored or played, and `isPlaying`
-  is not driven by a timer.
-- `clsx` and `tailwind-merge` are declared dependencies but never imported. There is no `cn()`
-  helper. Both can be removed.
+  is not driven by a timer. The scrub slider and marker clicks do work.
+- **`cn()` is imported from the `cn` package, not from `src/lib/utils.ts`.** All 20 UI primitives do
+  `import { cn } from "cn"`, so `src/lib/utils.ts` is orphaned — despite `components.json:17`
+  declaring it as the `utils` alias target. It is also the only consumer of `clsx` and
+  `tailwind-merge`, so those two dependencies are dead weight too. Deleting all three breaks
+  nothing today.
+- `src/App.css` (158 lines) is never imported.
 
 **Secrets.** `.env` and the SQLite files are gitignored; `.env.example` is the tracked template.
 See [Secret handling](#secret-handling).
