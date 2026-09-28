@@ -4,7 +4,7 @@ A long-term **spoken-communication coach** for a single user. Speak into your mi
 by Gemini, and watch your communication improve over weeks and months through a practice heatmap,
 monthly score trajectories, and a personal story bank.
 
-The app is branded **ANTIGRAVITY** in the UI.
+The app is branded **AI Communicator** in the UI.
 
 ---
 

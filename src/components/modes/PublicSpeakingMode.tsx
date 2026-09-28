@@ -79,41 +79,41 @@ export const PublicSpeakingMode: React.FC<Props> = ({ onSessionComplete }) => {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <div className="glass-panel p-6 rounded-2xl border border-white/10 flex items-center justify-between">
+      <div className="glass-panel p-6 rounded-2xl border border-black/10 flex items-center justify-between">
         <div>
-          <div className="flex items-center space-x-2 text-cyan-400 font-bold text-xs uppercase tracking-wider">
+          <div className="flex items-center space-x-2 text-cyan-600 font-bold text-xs uppercase tracking-wider">
             <Users className="w-4 h-4" />
             <span>Mode D — Public Speaking Simulator</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white mt-1">Presentation & Audience Pacing</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900 mt-1">Presentation & Audience Pacing</h2>
         </div>
 
-        <Badge className="bg-cyan-500/10 text-cyan-300 border-cyan-500/30 rounded-full shrink-0">
+        <Badge className="bg-cyan-500/10 text-cyan-600 border-cyan-500/30 rounded-full shrink-0">
           Audience State: {audienceReaction}
         </Badge>
       </div>
 
-      <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
-        <label className="text-xs text-slate-400 font-bold uppercase">Presentation Pitch Prompt</label>
+      <div className="glass-panel p-6 rounded-2xl border border-black/10 space-y-4">
+        <label className="text-xs text-slate-500 font-bold uppercase">Presentation Pitch Prompt</label>
         <input
           type="text"
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          className="w-full bg-surface-900 border border-white/10 rounded-xl p-3 text-sm text-white focus:outline-none focus:border-cyan-500"
+          className="w-full bg-surface-900 border border-black/10 rounded-xl p-3 text-sm text-slate-900 focus:outline-none focus:border-cyan-500"
         />
       </div>
 
-      <div className="glass-panel p-8 rounded-2xl border border-white/10 text-center space-y-6">
-        <div className="font-mono text-3xl font-extrabold text-white">
+      <div className="glass-panel p-8 rounded-2xl border border-black/10 text-center space-y-6">
+        <div className="font-mono text-3xl font-extrabold text-slate-900">
           {Math.floor(timerSeconds / 60).toString().padStart(2, '0')}:{(timerSeconds % 60).toString().padStart(2, '0')}
         </div>
 
-        <div className="bg-slate-950 p-4 rounded-xl border border-white/5 min-h-[100px] text-left text-xs font-mono text-cyan-300">
+        <div className="bg-slate-100 p-4 rounded-xl border border-black/5 min-h-[100px] text-left text-xs font-mono text-cyan-600">
           {transcript || 'Deliver your presentation speech...'}
         </div>
 
         {!isRecording ? (
-          <Button size="lg" onClick={handleStart} className="px-8 py-3.5 h-auto rounded-xl bg-cyan-500 text-surface-950 font-bold hover:bg-cyan-400">
+          <Button size="lg" onClick={handleStart} className="px-8 py-3.5 h-auto rounded-xl bg-cyan-500 text-slate-900 font-bold hover:bg-cyan-400">
             Start Speech
           </Button>
         ) : (

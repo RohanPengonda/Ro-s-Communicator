@@ -153,12 +153,12 @@ export const ModesHub: React.FC<ModesHubProps> = ({
   return (
     <div className="space-y-6">
       <div className="glass-card-accent p-6 rounded-2xl border border-emerald-500/30">
-        <Badge className="mb-3 bg-emerald-500/15 text-emerald-300 border-emerald-500/30 rounded-full gap-1.5">
+        <Badge className="mb-3 bg-emerald-500/15 text-violet-600 border-emerald-500/30 rounded-full gap-1.5">
           <Video className="w-3.5 h-3.5" />
           8 Specialized Training Environments
         </Badge>
-        <h2 className="text-2xl lg:text-3xl font-extrabold text-white">Interactive Training Modes</h2>
-        <p className="text-sm text-slate-300 mt-1 max-w-2xl">
+        <h2 className="text-2xl lg:text-3xl font-extrabold text-slate-900">Interactive Training Modes</h2>
+        <p className="text-sm text-slate-600 mt-1 max-w-2xl">
           Choose a specialized training environment tailored to your immediate communication objective.
         </p>
       </div>
@@ -170,23 +170,23 @@ export const ModesHub: React.FC<ModesHubProps> = ({
             <Card
               key={m.id}
               onClick={() => handleSelect(m.id)}
-              className="glass-panel glass-panel-hover cursor-pointer flex flex-col justify-between gap-4 rounded-2xl p-5 border-white/10"
+              className="glass-panel glass-panel-hover cursor-pointer flex flex-col justify-between gap-4 rounded-2xl p-5 border-black/10"
             >
               <CardContent className="flex flex-1 flex-col gap-3 p-0">
                 <div className="flex items-start justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-violet-600">
                     <IconComponent className="w-5 h-5" />
                   </div>
-                  <Badge variant="outline" className="text-slate-400 border-white/10">
+                  <Badge variant="outline" className="text-slate-500 border-black/10">
                     {m.tag}
                   </Badge>
                 </div>
                 <div className="space-y-1.5">
-                  <h3 className="font-extrabold text-white text-base">{m.title}</h3>
-                  <p className="text-xs text-slate-300 leading-relaxed">{m.desc}</p>
+                  <h3 className="font-extrabold text-slate-900 text-base">{m.title}</h3>
+                  <p className="text-xs text-slate-600 leading-relaxed">{m.desc}</p>
                 </div>
               </CardContent>
-              <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-emerald-400 font-bold">
+              <div className="pt-2 border-t border-black/5 flex items-center justify-between text-xs text-violet-600 font-bold">
                 <span>Start Practice</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </div>

@@ -85,24 +85,24 @@ export const DailyWorkoutMode: React.FC<Props> = ({ onWorkoutComplete, onSession
       {/* Workout Progress Header */}
       <div className="glass-card-accent p-6 rounded-2xl border border-emerald-500/30 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center space-x-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+          <div className="flex items-center space-x-2 text-violet-600 font-bold text-xs uppercase tracking-wider">
             <Flame className="w-4 h-4 text-amber-500 fill-amber-500" />
             <span>Today's Daily Communication Workout (8 Mins)</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white mt-1">{workout.title}</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900 mt-1">{workout.title}</h2>
         </div>
 
         {/* Step Progress Pills */}
-        <div className="flex items-center gap-2 bg-surface-900/80 p-2.5 rounded-xl border border-white/10 shrink-0">
+        <div className="flex items-center gap-2 bg-surface-900/80 p-2.5 rounded-xl border border-black/10 shrink-0">
           {workout.steps.map((step, idx) => (
             <Badge
               key={step.stepNumber}
               className={`gap-1.5 px-3 py-1 rounded-lg text-xs font-bold ${
                 step.completed
-                  ? 'bg-emerald-500 text-surface-950'
+                  ? 'bg-emerald-500 text-white'
                   : idx === workout.currentStepIndex
-                  ? 'bg-amber-500 text-surface-950 animate-pulse'
-                  : 'bg-surface-800 text-slate-400'
+                  ? 'bg-amber-500 text-slate-900 animate-pulse'
+                  : 'bg-surface-800 text-slate-500'
               }`}
             >
               {step.completed ? <CheckCircle2 className="w-3.5 h-3.5" /> : <span>Step {step.stepNumber}</span>}
@@ -112,12 +112,12 @@ export const DailyWorkoutMode: React.FC<Props> = ({ onWorkoutComplete, onSession
       </div>
 
       {/* Step Info Card */}
-      <div className="glass-panel p-4 rounded-xl border border-white/10 flex items-center justify-between">
+      <div className="glass-panel p-4 rounded-xl border border-black/10 flex items-center justify-between">
         <div>
-          <span className="text-xs text-slate-400 uppercase font-bold">Step {currentStep.stepNumber} of {workout.steps.length}</span>
-          <h3 className="text-lg font-bold text-white mt-0.5">{currentStep.title}</h3>
+          <span className="text-xs text-slate-500 uppercase font-bold">Step {currentStep.stepNumber} of {workout.steps.length}</span>
+          <h3 className="text-lg font-bold text-slate-900 mt-0.5">{currentStep.title}</h3>
         </div>
-        <span className="text-xs font-semibold text-emerald-400 bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-500/30">
+        <span className="text-xs font-semibold text-violet-600 bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-500/30">
           Prompt: "{currentStep.prompt}"
         </span>
       </div>

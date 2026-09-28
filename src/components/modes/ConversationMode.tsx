@@ -84,25 +84,25 @@ export const ConversationMode: React.FC<Props> = ({ onSessionComplete }) => {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <div className="glass-panel p-6 rounded-2xl border border-white/10 flex items-center justify-between">
+      <div className="glass-panel p-6 rounded-2xl border border-black/10 flex items-center justify-between">
         <div>
-          <div className="flex items-center space-x-2 text-indigo-400 font-bold text-xs uppercase">
+          <div className="flex items-center space-x-2 text-indigo-600 font-bold text-xs uppercase">
             <MessageSquare className="w-4 h-4" />
             <span>Mode B — Conversation Mode</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white mt-1">Natural Conversational Flow Partner</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900 mt-1">Natural Conversational Flow Partner</h2>
         </div>
 
         <Button
           onClick={handleFinishConversation}
-          className="gap-2 rounded-xl bg-emerald-500 text-surface-950 font-bold text-xs hover:bg-emerald-400 shrink-0"
+          className="gap-2 rounded-xl bg-emerald-500 text-white font-bold text-xs hover:bg-emerald-400 shrink-0"
         >
           End & Get Analysis
         </Button>
       </div>
 
       {/* Utterances Chat View */}
-      <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4 min-h-[350px] max-h-[450px] overflow-y-auto">
+      <div className="glass-panel p-6 rounded-2xl border border-black/10 space-y-4 min-h-[350px] max-h-[450px] overflow-y-auto">
         {utterances.map((u) => (
           <div
             key={u.id}
@@ -111,8 +111,8 @@ export const ConversationMode: React.FC<Props> = ({ onSessionComplete }) => {
             <div
               className={`max-w-lg p-4 rounded-2xl text-xs leading-relaxed ${
                 u.speaker === 'USER'
-                  ? 'bg-emerald-500 text-surface-950 font-medium rounded-br-none shadow-md'
-                  : 'bg-surface-900 border border-white/10 text-white rounded-bl-none'
+                  ? 'bg-emerald-500 text-white font-medium rounded-br-none shadow-md'
+                  : 'bg-surface-900 border border-black/10 text-slate-900 rounded-bl-none'
               }`}
             >
               <span className="text-[10px] font-bold opacity-60 block uppercase mb-0.5">
@@ -132,12 +132,12 @@ export const ConversationMode: React.FC<Props> = ({ onSessionComplete }) => {
           value={currentText}
           onChange={(e) => setCurrentText(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSendSpeech()}
-          className="flex-1 h-11 rounded-xl bg-surface-900 border-white/10 text-sm text-white placeholder:text-slate-400"
+          className="flex-1 h-11 rounded-xl bg-surface-900 border-black/10 text-sm text-slate-900 placeholder:text-slate-500"
         />
         <Button
           size="icon"
           onClick={handleSendSpeech}
-          className="h-11 w-11 rounded-xl bg-emerald-500 text-surface-950 font-bold hover:bg-emerald-400"
+          className="h-11 w-11 rounded-xl bg-emerald-500 text-white font-bold hover:bg-emerald-400"
         >
           <Send className="w-5 h-5" />
         </Button>

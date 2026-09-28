@@ -94,11 +94,11 @@ export const App: React.FC = () => {
 
   if (!profile) {
     return (
-      <div className="min-h-screen bg-surface-950 text-white flex items-center justify-center">
+      <div className="min-h-screen bg-surface-950 text-slate-900 flex items-center justify-center">
         <div className="w-full max-w-sm space-y-4">
-          <div className="flex items-center justify-center gap-2 text-emerald-400">
+          <div className="flex items-center justify-center gap-2 text-violet-600">
             <Spinner className="size-5" />
-            <p className="text-sm text-slate-400 font-bold">Loading Personal AI Communication Agent...</p>
+            <p className="text-sm text-slate-500 font-bold">Loading Personal AI Communication Agent...</p>
           </div>
           <Skeleton className="h-9 w-full" />
           <Skeleton className="h-24 w-full" />
@@ -113,7 +113,7 @@ export const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-surface-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-surface-950 text-slate-800 flex flex-col font-sans">
       
       {/* Top Navbar */}
       <Navbar
@@ -198,7 +198,7 @@ export const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/5 py-4 text-center text-xs text-slate-400">
+      <footer className="border-t border-black/5 py-4 text-center text-xs text-slate-500">
         Personal AI Communication Agent — Powered by Gemini 2.5 Flash & Google DeepMind Agentic Coding Framework
       </footer>
 

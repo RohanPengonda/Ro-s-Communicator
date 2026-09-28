@@ -81,42 +81,42 @@ export const ExplainSimplyMode: React.FC<Props> = ({ onSessionComplete }) => {
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <div className="glass-card-accent p-6 rounded-2xl border border-emerald-500/30">
-        <div className="flex items-center space-x-2 text-emerald-400 font-bold text-xs uppercase">
+        <div className="flex items-center space-x-2 text-violet-600 font-bold text-xs uppercase">
           <HelpCircle className="w-4 h-4" />
           <span>Mode G — Audience Adaptation Trainer</span>
         </div>
-        <h2 className="text-2xl font-extrabold text-white mt-1">Explain Complex Ideas Simply</h2>
+        <h2 className="text-2xl font-extrabold text-slate-900 mt-1">Explain Complex Ideas Simply</h2>
       </div>
 
-      <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-3">
-        <span className="text-xs text-slate-400 font-bold uppercase">Select Target Audience Level</span>
+      <div className="glass-panel p-6 rounded-2xl border border-black/10 space-y-3">
+        <span className="text-xs text-slate-500 font-bold uppercase">Select Target Audience Level</span>
         <div className="space-y-2">
           {AUDIENCES.map((item, idx) => (
             <button
               key={idx}
               onClick={() => setSelectedAudience(item)}
               className={`w-full text-left p-4 rounded-xl border text-sm transition-all ${
-                selectedAudience.label === item.label ? 'bg-emerald-500/20 border-emerald-500 text-white font-bold' : 'bg-surface-900 border-white/5 text-slate-300'
+                selectedAudience.label === item.label ? 'bg-emerald-500/20 border-emerald-500 text-white font-bold' : 'bg-surface-900 border-black/5 text-slate-600'
               }`}
             >
-              <span className="text-xs text-emerald-400 uppercase font-bold block mb-1">{item.label}</span>
+              <span className="text-xs text-violet-600 uppercase font-bold block mb-1">{item.label}</span>
               "{item.prompt}"
             </button>
           ))}
         </div>
       </div>
 
-      <div className="glass-panel p-8 rounded-2xl border border-white/10 text-center space-y-6">
-        <div className="font-mono text-3xl font-extrabold text-white">
+      <div className="glass-panel p-8 rounded-2xl border border-black/10 text-center space-y-6">
+        <div className="font-mono text-3xl font-extrabold text-slate-900">
           {Math.floor(timerSeconds / 60).toString().padStart(2, '0')}:{(timerSeconds % 60).toString().padStart(2, '0')}
         </div>
 
-        <div className="bg-slate-950 p-4 rounded-xl border border-white/5 min-h-[100px] text-left text-xs font-mono text-emerald-300">
+        <div className="bg-slate-100 p-4 rounded-xl border border-black/5 min-h-[100px] text-left text-xs font-mono text-violet-600">
           {transcript || 'Explain the concept using a vivid simple analogy...'}
         </div>
 
         {!isRecording ? (
-          <Button size="lg" onClick={handleStart} className="px-8 py-3.5 h-auto rounded-xl bg-emerald-500 text-surface-950 font-bold hover:bg-emerald-400">
+          <Button size="lg" onClick={handleStart} className="px-8 py-3.5 h-auto rounded-xl bg-emerald-500 text-white font-bold hover:bg-emerald-400">
             Start Explanation
           </Button>
         ) : (

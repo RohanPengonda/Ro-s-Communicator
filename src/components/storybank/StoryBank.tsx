@@ -87,21 +87,21 @@ export const StoryBank: React.FC<StoryBankProps> = ({ stories, onSaveStory, onPr
       {/* Header Banner */}
       <div className="glass-card-accent p-6 rounded-2xl border border-emerald-500/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <Badge className="mb-3 bg-emerald-500/15 text-emerald-300 border-emerald-500/30 rounded-full gap-1.5">
+          <Badge className="mb-3 bg-emerald-500/15 text-violet-600 border-emerald-500/30 rounded-full gap-1.5">
             <BookOpen className="w-3.5 h-3.5" />
             Personal Life Story Bank
           </Badge>
-          <h2 className="text-2xl lg:text-3xl font-extrabold text-white mt-1">
+          <h2 className="text-2xl lg:text-3xl font-extrabold text-slate-900 mt-1">
             Story Vault & Interview Mapping
           </h2>
-          <p className="text-sm text-slate-300 mt-1 max-w-2xl">
+          <p className="text-sm text-slate-600 mt-1 max-w-2xl">
             Store, polish, and optimize core life experiences. A single well-structured story can seamlessly answer 5+ different behavioral interview questions and speech hooks.
           </p>
         </div>
 
         <Button
           onClick={handleOpenCreate}
-          className="gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-surface-950 font-bold text-sm shadow-lg shadow-emerald-500/20 shrink-0"
+          className="gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold text-sm shadow-lg shadow-emerald-500/20 shrink-0"
         >
           <Plus className="w-4 h-4" />
           Add New Story
@@ -116,13 +116,13 @@ export const StoryBank: React.FC<StoryBankProps> = ({ stories, onSaveStory, onPr
           
           {/* Search Box */}
           <div className="relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <Input
               type="text"
               placeholder="Search stories by keyword or theme..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-9 h-10 rounded-xl bg-surface-900/80 border-white/10 text-white placeholder:text-slate-400"
+              className="pl-9 h-10 rounded-xl bg-surface-900/80 border-black/10 text-slate-900 placeholder:text-slate-500"
             />
           </div>
 
@@ -141,27 +141,27 @@ export const StoryBank: React.FC<StoryBankProps> = ({ stories, onSaveStory, onPr
                     className={`p-4 rounded-xl border transition-all cursor-pointer ${
                       isSelected
                         ? 'bg-emerald-500/15 border-emerald-500 shadow-md'
-                        : 'bg-surface-900/60 border-white/5 hover:border-white/20 hover:bg-white/5'
+                        : 'bg-surface-900/60 border-black/5 hover:border-black/20 hover:bg-black/5'
                     }`}
                   >
                     <CardContent className="p-0">
                       <div className="flex items-start justify-between gap-2">
-                        <h4 className="font-bold text-white text-base">{story.title}</h4>
-                        <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 rounded-full shrink-0">
+                        <h4 className="font-bold text-slate-900 text-base">{story.title}</h4>
+                        <Badge className="bg-emerald-500/20 text-violet-600 border-emerald-500/30 rounded-full shrink-0">
                           {story.practiceCount} Practices
                         </Badge>
                       </div>
 
-                      <p className="text-xs text-slate-300 line-clamp-2 mt-1.5 leading-relaxed">
+                      <p className="text-xs text-slate-600 line-clamp-2 mt-1.5 leading-relaxed">
                         {story.polishedVersion || story.rawVersion}
                       </p>
 
-                      <div className="flex items-center justify-between mt-3 text-[11px] text-slate-400 border-t border-white/5 pt-2">
+                      <div className="flex items-center justify-between mt-3 text-[11px] text-slate-500 border-t border-black/5 pt-2">
                         <div className="flex items-center gap-1">
-                          <Tag className="w-3 h-3 text-cyan-400" />
+                          <Tag className="w-3 h-3 text-cyan-600" />
                           <span>{story.themes.slice(0, 2).join(', ')}</span>
                         </div>
-                        <span className="text-emerald-400 font-medium">
+                        <span className="text-violet-600 font-medium">
                           Answers {story.interviewUseCases.length} Interview Qs
                         </span>
                       </div>
@@ -177,23 +177,23 @@ export const StoryBank: React.FC<StoryBankProps> = ({ stories, onSaveStory, onPr
         {/* Right Side: Detail Viewer */}
         <div className="lg:col-span-7">
           {selectedStory ? (
-            <Card className="p-6 rounded-2xl border-white/10 gap-5">
+            <Card className="p-6 rounded-2xl border-black/10 gap-5">
               
               {/* Story Header */}
-              <div className="flex items-start justify-between gap-3 border-b border-white/10 pb-4">
+              <div className="flex items-start justify-between gap-3 border-b border-black/10 pb-4">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2 flex-wrap">
-                    <Badge className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30 rounded-full uppercase">
+                    <Badge className="bg-emerald-500/20 text-violet-600 border-emerald-500/30 rounded-full uppercase">
                       Polished Story Vault
                     </Badge>
-                    <span className="text-xs text-slate-400">Practiced {selectedStory.practiceCount} times</span>
+                    <span className="text-xs text-slate-500">Practiced {selectedStory.practiceCount} times</span>
                   </div>
-                  <h3 className="text-2xl font-extrabold text-white mt-1 break-words">{selectedStory.title}</h3>
+                  <h3 className="text-2xl font-extrabold text-slate-900 mt-1 break-words">{selectedStory.title}</h3>
                 </div>
 
                 <Button
                   onClick={() => onPracticeStory(selectedStory)}
-                  className="gap-2 px-4 py-2 rounded-xl bg-emerald-500 text-surface-950 font-bold text-xs shadow-lg shadow-emerald-500/20 hover:bg-emerald-400 shrink-0"
+                  className="gap-2 px-4 py-2 rounded-xl bg-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-500/20 hover:bg-emerald-400 shrink-0"
                 >
                   <PlayCircle className="w-4 h-4" />
                   Practice Story
@@ -208,55 +208,55 @@ export const StoryBank: React.FC<StoryBankProps> = ({ stories, onSaveStory, onPr
                 </TabsList>
                 <TabsContent value="polished">
                   <div className="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/30">
-                    <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs uppercase mb-1">
-                      <Sparkles className="w-4 h-4 text-emerald-400" />
+                    <div className="flex items-center gap-2 text-violet-600 font-bold text-xs uppercase mb-1">
+                      <Sparkles className="w-4 h-4 text-violet-600" />
                       Polished High-Impact Version
                     </div>
-                    <p className="text-sm text-slate-100 leading-relaxed font-medium">
+                    <p className="text-sm text-slate-800 leading-relaxed font-medium">
                       "{selectedStory.polishedVersion}"
                     </p>
                   </div>
                 </TabsContent>
                 <TabsContent value="raw">
-                  <div className="bg-surface-900/60 p-3.5 rounded-xl border border-white/5 text-xs">
-                    <span className="text-slate-400 uppercase font-semibold block mb-1">Raw Life Experience</span>
-                    <p className="text-slate-300 italic font-mono">{selectedStory.rawVersion}</p>
+                  <div className="bg-surface-900/60 p-3.5 rounded-xl border border-black/5 text-xs">
+                    <span className="text-slate-500 uppercase font-semibold block mb-1">Raw Life Experience</span>
+                    <p className="text-slate-600 italic font-mono">{selectedStory.rawVersion}</p>
                   </div>
                 </TabsContent>
               </Tabs>
 
               {/* Conflict & Turning Point */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                <div className="bg-surface-900/80 p-3.5 rounded-xl border border-white/5">
-                  <span className="text-xs text-slate-400 font-semibold uppercase flex items-center gap-1">
-                    <Tag className="w-3.5 h-3.5 text-rose-400" />
+                <div className="bg-surface-900/80 p-3.5 rounded-xl border border-black/5">
+                  <span className="text-xs text-slate-500 font-semibold uppercase flex items-center gap-1">
+                    <Tag className="w-3.5 h-3.5 text-rose-600" />
                     Core Conflict
                   </span>
-                  <p className="text-xs text-rose-300 font-medium mt-1">{selectedStory.coreConflict}</p>
+                  <p className="text-xs text-rose-600 font-medium mt-1">{selectedStory.coreConflict}</p>
                 </div>
 
-                <div className="bg-surface-900/80 p-3.5 rounded-xl border border-white/5">
-                  <span className="text-xs text-slate-400 font-semibold uppercase flex items-center gap-1">
-                    <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <div className="bg-surface-900/80 p-3.5 rounded-xl border border-black/5">
+                  <span className="text-xs text-slate-500 font-semibold uppercase flex items-center gap-1">
+                    <Sparkles className="w-3.5 h-3.5 text-violet-600" />
                     Turning Point Action
                   </span>
-                  <p className="text-xs text-emerald-300 font-medium mt-1">{selectedStory.turningPoint}</p>
+                  <p className="text-xs text-violet-600 font-medium mt-1">{selectedStory.turningPoint}</p>
                 </div>
               </div>
 
               {/* Interview Questions Answered Mapping */}
-              <div className="bg-surface-900/80 p-4 rounded-xl border border-white/10 space-y-2">
-                <div className="flex items-center gap-2 text-cyan-400 font-bold text-xs uppercase">
+              <div className="bg-surface-900/80 p-4 rounded-xl border border-black/10 space-y-2">
+                <div className="flex items-center gap-2 text-cyan-600 font-bold text-xs uppercase">
                   <HelpCircle className="w-4 h-4" />
                   Interview & Speech Questions This Story Answers ({selectedStory.interviewUseCases.length})
                 </div>
 
-                <Separator className="bg-white/5" />
+                <Separator className="bg-black/5" />
 
                 <div className="space-y-1.5 pt-1">
                   {selectedStory.interviewUseCases.map((q, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-xs text-slate-200">
-                      <ChevronRight className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <div key={idx} className="flex items-center gap-2 text-xs text-slate-700">
+                      <ChevronRight className="w-3.5 h-3.5 text-cyan-600 shrink-0" />
                       <span>"{q}"</span>
                     </div>
                   ))}
@@ -265,13 +265,13 @@ export const StoryBank: React.FC<StoryBankProps> = ({ stories, onSaveStory, onPr
 
             </Card>
           ) : (
-            <Empty className="glass-panel p-12 rounded-2xl border-dashed border-white/20">
+            <Empty className="glass-panel p-12 rounded-2xl border-dashed border-black/20">
               <EmptyMedia variant="icon">
                 <BookOpen />
               </EmptyMedia>
               <EmptyContent>
-                <EmptyTitle className="text-white">No story selected</EmptyTitle>
-                <EmptyDescription className="text-slate-400">
+                <EmptyTitle className="text-slate-900">No story selected</EmptyTitle>
+                <EmptyDescription className="text-slate-500">
                   Select a story from the vault on the left, or create a new one to start mapping interviews.
                 </EmptyDescription>
               </EmptyContent>
@@ -284,80 +284,80 @@ export const StoryBank: React.FC<StoryBankProps> = ({ stories, onSaveStory, onPr
       <Dialog open={isEditing} onOpenChange={(open) => setIsEditing(open)}>
         <DialogContent className="max-w-2xl rounded-2xl gap-4">
           <DialogHeader>
-            <DialogTitle className="text-lg font-bold text-white">Create / Edit Story</DialogTitle>
-            <DialogDescription className="text-xs text-slate-400">
+            <DialogTitle className="text-lg font-bold text-slate-900">Create / Edit Story</DialogTitle>
+            <DialogDescription className="text-xs text-slate-500">
               Structure your raw experience into a high-impact story vault entry.
             </DialogDescription>
           </DialogHeader>
 
           <div className="grid gap-3 py-2">
             <div className="grid gap-1.5">
-              <Label htmlFor="story-title" className="text-xs text-slate-400 font-semibold">Story Title</Label>
+              <Label htmlFor="story-title" className="text-xs text-slate-500 font-semibold">Story Title</Label>
               <Input
                 id="story-title"
                 type="text"
                 placeholder="e.g. The 3 AM Production Outage"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                className="rounded-xl bg-surface-900 border-white/10 text-sm text-white"
+                className="rounded-xl bg-surface-900 border-black/10 text-sm text-slate-900"
               />
             </div>
 
             <div className="grid gap-1.5">
-              <Label htmlFor="story-raw" className="text-xs text-slate-400 font-semibold">Raw Experience / What Happened</Label>
+              <Label htmlFor="story-raw" className="text-xs text-slate-500 font-semibold">Raw Experience / What Happened</Label>
               <Textarea
                 id="story-raw"
                 placeholder="Describe what happened in your own natural words..."
                 value={formData.rawVersion}
                 onChange={(e) => setFormData({ ...formData, rawVersion: e.target.value })}
-                className="rounded-xl bg-surface-900 border-white/10 text-sm text-white min-h-24"
+                className="rounded-xl bg-surface-900 border-black/10 text-sm text-slate-900 min-h-24"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div className="grid gap-1.5">
-                <Label htmlFor="story-conflict" className="text-xs text-slate-400 font-semibold">Core Conflict / High Stakes</Label>
+                <Label htmlFor="story-conflict" className="text-xs text-slate-500 font-semibold">Core Conflict / High Stakes</Label>
                 <Input
                   id="story-conflict"
                   type="text"
                   placeholder="What went wrong or was at risk?"
                   value={formData.coreConflict}
                   onChange={(e) => setFormData({ ...formData, coreConflict: e.target.value })}
-                  className="rounded-xl bg-surface-900 border-white/10 text-xs text-white"
+                  className="rounded-xl bg-surface-900 border-black/10 text-xs text-slate-900"
                 />
               </div>
               <div className="grid gap-1.5">
-                <Label htmlFor="story-turning" className="text-xs text-slate-400 font-semibold">Turning Point Decision</Label>
+                <Label htmlFor="story-turning" className="text-xs text-slate-500 font-semibold">Turning Point Decision</Label>
                 <Input
                   id="story-turning"
                   type="text"
                   placeholder="What key action flipped the outcome?"
                   value={formData.turningPoint}
                   onChange={(e) => setFormData({ ...formData, turningPoint: e.target.value })}
-                  className="rounded-xl bg-surface-900 border-white/10 text-xs text-white"
+                  className="rounded-xl bg-surface-900 border-black/10 text-xs text-slate-900"
                 />
               </div>
             </div>
 
             <div className="grid gap-1.5">
-              <Label htmlFor="story-polished" className="text-xs text-slate-400 font-semibold">Polished High-Impact Version</Label>
+              <Label htmlFor="story-polished" className="text-xs text-slate-500 font-semibold">Polished High-Impact Version</Label>
               <Textarea
                 id="story-polished"
                 placeholder="Polished story version (or leave blank to auto-generate)..."
                 value={formData.polishedVersion}
                 onChange={(e) => setFormData({ ...formData, polishedVersion: e.target.value })}
-                className="rounded-xl bg-surface-900 border-white/10 text-xs text-emerald-300 min-h-20"
+                className="rounded-xl bg-surface-900 border-black/10 text-xs text-violet-600 min-h-20"
               />
             </div>
           </div>
 
           <DialogFooter showCloseButton>
-            <Button variant="ghost" onClick={() => setIsEditing(false)} className="rounded-xl text-slate-300">
+            <Button variant="ghost" onClick={() => setIsEditing(false)} className="rounded-xl text-slate-600">
               Cancel
             </Button>
             <Button
               onClick={handleSave}
-              className="rounded-xl bg-emerald-500 text-surface-950 font-bold shadow-md hover:bg-emerald-400"
+              className="rounded-xl bg-emerald-500 text-white font-bold shadow-md hover:bg-emerald-400"
             >
               Save Story to Vault
             </Button>

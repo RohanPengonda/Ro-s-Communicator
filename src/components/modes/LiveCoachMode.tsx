@@ -149,24 +149,24 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
     <div className="space-y-6 max-w-5xl mx-auto">
       
       {/* Top Title Banner */}
-      <div className="glass-panel p-6 rounded-2xl border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="glass-panel p-6 rounded-2xl border border-black/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center space-x-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+          <div className="flex items-center space-x-2 text-violet-600 font-bold text-xs uppercase tracking-wider">
             <Video className="w-4 h-4" />
             <span>Mode A — Live Coach</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white mt-1">
+          <h2 className="text-2xl font-extrabold text-slate-900 mt-1">
             Real-Time Visual & Voice Coaching HUD
           </h2>
-          <p className="text-xs text-slate-300 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             Speak naturally into camera and mic. AI observes speaking pace, filler spikes, and hook engagement with subtle feedback.
           </p>
         </div>
 
         {/* Recording Timer */}
-        <div className="flex items-center space-x-3 bg-surface-900/90 p-3 rounded-xl border border-white/10 shrink-0">
+        <div className="flex items-center space-x-3 bg-surface-900/90 p-3 rounded-xl border border-black/10 shrink-0">
           <div className="w-3 h-3 rounded-full bg-rose-500 animate-ping" />
-          <span className="font-mono text-xl font-bold text-white">{formatTimer(timerSeconds)}</span>
+          <span className="font-mono text-xl font-bold text-slate-900">{formatTimer(timerSeconds)}</span>
         </div>
       </div>
 
@@ -174,20 +174,20 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         
         {/* Camera View Subpanel */}
-        <div className="lg:col-span-7 glass-panel p-4 rounded-2xl border border-white/10 relative overflow-hidden flex flex-col items-center justify-center min-h-[380px] bg-slate-950">
+        <div className="lg:col-span-7 glass-panel p-4 rounded-2xl border border-black/10 relative overflow-hidden flex flex-col items-center justify-center min-h-[380px] bg-slate-100">
           <video
             ref={videoRef}
             autoPlay
             playsInline
             muted
-            className="w-full h-full object-cover rounded-xl border border-white/10 transform -scale-x-100"
+            className="w-full h-full object-cover rounded-xl border border-black/10 transform -scale-x-100"
           />
 
           {!cameraActive && (
             <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-6 bg-surface-950/90">
-              <Video className="w-12 h-12 text-slate-500 mb-2 animate-bounce" />
-              <p className="text-sm font-bold text-white">Camera Preview Placeholder</p>
-              <p className="text-xs text-slate-400">Allow camera permission in browser to view live feedback</p>
+              <Video className="w-12 h-12 text-slate-400 mb-2 animate-bounce" />
+              <p className="text-sm font-bold text-slate-900">Camera Preview Placeholder</p>
+              <p className="text-xs text-slate-500">Allow camera permission in browser to view live feedback</p>
             </div>
           )}
 
@@ -196,22 +196,22 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
             <div className="absolute top-6 left-6 right-6 flex items-center justify-between pointer-events-none">
               
               {/* Pace Pill */}
-              <Badge className="bg-surface-950/80 text-emerald-400 border-white/10 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5">
-                <Activity className="w-3.5 h-3.5 text-emerald-400" />
+              <Badge className="bg-surface-950/80 text-violet-600 border-black/10 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5">
+                <Activity className="w-3.5 h-3.5 text-violet-600" />
                 Pace: {paceWpm || 140} WPM
               </Badge>
 
               {/* Filler Alert Pill */}
               {fillerCount > 0 && (
-                <Badge className="bg-rose-950/90 text-rose-300 border-rose-500/40 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5 animate-bounce">
-                  <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
+                <Badge className="bg-rose-950/90 text-rose-600 border-rose-500/40 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5 animate-bounce">
+                  <AlertCircle className="w-3.5 h-3.5 text-rose-600" />
                   Filler Spike: "{lastFiller}" ({fillerCount})
                 </Badge>
               )}
 
               {/* Eye Contact Indicator */}
-              <Badge className="bg-surface-950/80 text-cyan-300 border-white/10 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5">
-                <Eye className="w-3.5 h-3.5 text-cyan-400" />
+              <Badge className="bg-surface-950/80 text-cyan-600 border-black/10 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5">
+                <Eye className="w-3.5 h-3.5 text-cyan-600" />
                 Lens Engagement: Good
               </Badge>
             </div>
@@ -219,20 +219,20 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
         </div>
 
         {/* Right Side Live Real-Time Telemetry */}
-        <div className="lg:col-span-5 glass-panel p-6 rounded-2xl border border-white/10 flex flex-col justify-between space-y-4">
+        <div className="lg:col-span-5 glass-panel p-6 rounded-2xl border border-black/10 flex flex-col justify-between space-y-4">
           
           <div className="space-y-4">
-            <h3 className="text-sm font-bold text-white uppercase tracking-wider border-b border-white/10 pb-2">
+            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider border-b border-black/10 pb-2">
               Live Speech Telemetry
             </h3>
 
             {/* Audio Volume Visualizer Bar */}
             <div>
-              <div className="flex justify-between text-xs text-slate-400 font-semibold mb-1">
+              <div className="flex justify-between text-xs text-slate-500 font-semibold mb-1">
                 <span>Audio Stream Input</span>
                 <span>{volume}%</span>
               </div>
-              <div className="w-full bg-slate-900 h-3 rounded-full overflow-hidden p-0.5 border border-white/5">
+              <div className="w-full bg-slate-100 h-3 rounded-full overflow-hidden p-0.5 border border-black/5">
                 <div 
                   className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 transition-all duration-75"
                   style={{ width: `${volume}%` }}
@@ -242,24 +242,24 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
 
             {/* Filler Counter Gauge */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="bg-surface-900/80 p-3 rounded-xl border border-white/5">
-                <span className="text-[11px] text-slate-400 uppercase font-semibold">Filler Words</span>
-                <p className="text-2xl font-extrabold text-amber-400 mt-0.5">{fillerCount}</p>
+              <div className="bg-surface-900/80 p-3 rounded-xl border border-black/5">
+                <span className="text-[11px] text-slate-500 uppercase font-semibold">Filler Words</span>
+                <p className="text-2xl font-extrabold text-amber-600 mt-0.5">{fillerCount}</p>
               </div>
 
-              <div className="bg-surface-900/80 p-3 rounded-xl border border-white/5">
-                <span className="text-[11px] text-slate-400 uppercase font-semibold">Pace Target</span>
-                <p className="text-2xl font-extrabold text-emerald-400 mt-0.5">
-                  {paceWpm || 140} <span className="text-xs text-slate-400">WPM</span>
+              <div className="bg-surface-900/80 p-3 rounded-xl border border-black/5">
+                <span className="text-[11px] text-slate-500 uppercase font-semibold">Pace Target</span>
+                <p className="text-2xl font-extrabold text-violet-600 mt-0.5">
+                  {paceWpm || 140} <span className="text-xs text-slate-500">WPM</span>
                 </p>
               </div>
             </div>
 
             {/* Live Transcript Stream */}
-            <div className="bg-slate-950 p-4 rounded-xl border border-white/5 space-y-1 h-36 overflow-y-auto">
-              <span className="text-[11px] text-slate-400 uppercase font-semibold block">Live Speech Stream</span>
-              <p className="text-xs text-slate-200 leading-relaxed font-mono">
-                {transcript} <span className="text-emerald-400 underline">{interimText}</span>
+            <div className="bg-slate-100 p-4 rounded-xl border border-black/5 space-y-1 h-36 overflow-y-auto">
+              <span className="text-[11px] text-slate-500 uppercase font-semibold block">Live Speech Stream</span>
+              <p className="text-xs text-slate-700 leading-relaxed font-mono">
+                {transcript} <span className="text-violet-600 underline">{interimText}</span>
               </p>
             </div>
           </div>
@@ -271,7 +271,7 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
                 size="lg"
                 onClick={handleStartRecording}
                 disabled={isAnalyzing}
-                className="gap-2 w-full py-4 h-auto rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-surface-950 font-extrabold text-base shadow-xl shadow-emerald-500/25 transition-all"
+                className="gap-2 w-full py-4 h-auto rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-extrabold text-base shadow-xl shadow-emerald-500/25 transition-all"
               >
                 <Mic className="w-5 h-5" />
                 Start Live Session
@@ -288,7 +288,7 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
             )}
 
             {isAnalyzing && (
-              <div className="mt-3 flex items-center justify-center space-x-2 text-emerald-400 text-xs font-semibold">
+              <div className="mt-3 flex items-center justify-center space-x-2 text-violet-600 text-xs font-semibold">
                 <Sparkles className="w-4 h-4 animate-spin" />
                 <span>Gemini AI Analyzing Communication Performance...</span>
               </div>

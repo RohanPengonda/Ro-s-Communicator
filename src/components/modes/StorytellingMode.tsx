@@ -104,28 +104,28 @@ export const StorytellingMode: React.FC<StorytellingModeProps> = ({
       
       <div className="glass-card-accent p-6 rounded-2xl border border-emerald-500/30 flex items-center justify-between">
         <div>
-          <div className="flex items-center space-x-2 text-emerald-400 font-bold text-xs uppercase tracking-wider">
+          <div className="flex items-center space-x-2 text-violet-600 font-bold text-xs uppercase tracking-wider">
             <BookOpen className="w-4 h-4" />
             <span>Mode C — Storytelling Challenge</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white mt-1">
+          <h2 className="text-2xl font-extrabold text-slate-900 mt-1">
             Storytelling Mastery Workout
           </h2>
-          <p className="text-xs text-slate-300 mt-1">
+          <p className="text-xs text-slate-600 mt-1">
             Build hooks, tension, character, conflict, and memorable endings.
           </p>
         </div>
 
         {previousAttemptSession && (
-          <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 rounded-full shrink-0">
+          <Badge className="bg-cyan-500/20 text-cyan-600 border-cyan-500/30 rounded-full shrink-0">
             Retry Attempt #{previousAttemptSession.attemptNumber + 1}
           </Badge>
         )}
       </div>
 
       {/* Selected Challenge Prompt Card */}
-      <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
-        <h3 className="text-xs uppercase font-bold text-slate-400">Select Story Challenge Prompt</h3>
+      <div className="glass-panel p-6 rounded-2xl border border-black/10 space-y-4">
+        <h3 className="text-xs uppercase font-bold text-slate-500">Select Story Challenge Prompt</h3>
 
         <div className="grid grid-cols-1 gap-2.5">
           {STORY_PROMPTS.map((prompt, idx) => (
@@ -136,7 +136,7 @@ export const StorytellingMode: React.FC<StorytellingModeProps> = ({
               className={`p-4 rounded-xl border text-left text-sm transition-all ${
                 selectedPrompt === prompt
                   ? 'bg-emerald-500/20 border-emerald-500 text-white font-bold'
-                  : 'bg-surface-900/60 border-white/5 text-slate-300 hover:text-white'
+                  : 'bg-surface-900/60 border-black/5 text-slate-600 hover:text-slate-900'
               }`}
             >
               "{prompt}"
@@ -146,12 +146,12 @@ export const StorytellingMode: React.FC<StorytellingModeProps> = ({
       </div>
 
       {/* Recording Box */}
-      <div className="glass-panel p-8 rounded-2xl border border-white/10 text-center space-y-6">
-        <div className="font-mono text-3xl font-extrabold text-white">
+      <div className="glass-panel p-8 rounded-2xl border border-black/10 text-center space-y-6">
+        <div className="font-mono text-3xl font-extrabold text-slate-900">
           {Math.floor(timerSeconds / 60).toString().padStart(2, '0')}:{(timerSeconds % 60).toString().padStart(2, '0')}
         </div>
 
-        <div className="bg-slate-950 p-4 rounded-xl border border-white/5 min-h-[100px] max-h-40 overflow-y-auto text-left text-xs font-mono text-emerald-300">
+        <div className="bg-slate-100 p-4 rounded-xl border border-black/5 min-h-[100px] max-h-40 overflow-y-auto text-left text-xs font-mono text-violet-600">
           {transcript || 'Click start and begin telling your story...'}
         </div>
 
@@ -160,7 +160,7 @@ export const StorytellingMode: React.FC<StorytellingModeProps> = ({
             size="lg"
             onClick={handleStart}
             disabled={isAnalyzing}
-            className="px-8 py-3.5 h-auto rounded-xl bg-emerald-500 text-surface-950 font-extrabold text-base shadow-lg hover:bg-emerald-400 transition-all"
+            className="px-8 py-3.5 h-auto rounded-xl bg-emerald-500 text-white font-extrabold text-base shadow-lg hover:bg-emerald-400 transition-all"
           >
             Start Story Recording
           </Button>

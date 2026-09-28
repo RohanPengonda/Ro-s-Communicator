@@ -99,20 +99,20 @@ export const SpontaneousChallengeMode: React.FC<Props> = ({ onSessionComplete })
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <div className="glass-panel p-6 rounded-2xl border border-white/10 flex items-center justify-between">
+      <div className="glass-panel p-6 rounded-2xl border border-black/10 flex items-center justify-between">
         <div>
-          <div className="flex items-center space-x-2 text-amber-400 font-bold text-xs uppercase tracking-wider">
+          <div className="flex items-center space-x-2 text-amber-600 font-bold text-xs uppercase tracking-wider">
             <Zap className="w-4 h-4" />
             <span>Mode F — Spontaneous Agility</span>
           </div>
-          <h2 className="text-2xl font-extrabold text-white mt-1">Rapid-Fire Surprise Challenges</h2>
+          <h2 className="text-2xl font-extrabold text-slate-900 mt-1">Rapid-Fire Surprise Challenges</h2>
         </div>
 
         <Button
           variant="outline"
           size="sm"
           onClick={handleSurpriseMe}
-          className="gap-2 rounded-xl bg-amber-500/20 text-amber-300 border-amber-500/30 text-xs font-bold hover:bg-amber-500/30 hover:text-amber-200 shrink-0"
+          className="gap-2 rounded-xl bg-amber-500/20 text-amber-600 border-amber-500/30 text-xs font-bold hover:bg-amber-500/30 hover:text-amber-700 shrink-0"
         >
           <RefreshCw className="w-4 h-4" />
           New Random Prompt
@@ -121,29 +121,29 @@ export const SpontaneousChallengeMode: React.FC<Props> = ({ onSessionComplete })
 
       {/* Surprise Prompt Card */}
       <div className="glass-card-accent p-8 rounded-2xl border border-amber-500/30 text-center space-y-4">
-        <span className="text-xs font-bold text-amber-400 uppercase tracking-widest">Surprise Challenge Prompt</span>
-        <h3 className="text-2xl font-extrabold text-white max-w-2xl mx-auto">
+        <span className="text-xs font-bold text-amber-600 uppercase tracking-widest">Surprise Challenge Prompt</span>
+        <h3 className="text-2xl font-extrabold text-slate-900 max-w-2xl mx-auto">
           "{prompt}"
         </h3>
 
         {prepActive && (
-          <div className="text-xl font-bold text-amber-400 animate-pulse">
+          <div className="text-xl font-bold text-amber-600 animate-pulse">
             Prep Countdown: {countdown}s
           </div>
         )}
       </div>
 
-      <div className="glass-panel p-8 rounded-2xl border border-white/10 text-center space-y-6">
-        <div className="font-mono text-3xl font-extrabold text-white">
+      <div className="glass-panel p-8 rounded-2xl border border-black/10 text-center space-y-6">
+        <div className="font-mono text-3xl font-extrabold text-slate-900">
           {Math.floor(timerSeconds / 60).toString().padStart(2, '0')}:{(timerSeconds % 60).toString().padStart(2, '0')}
         </div>
 
-        <div className="bg-slate-950 p-4 rounded-xl border border-white/5 min-h-[100px] text-left text-xs font-mono text-amber-300">
+        <div className="bg-slate-100 p-4 rounded-xl border border-black/5 min-h-[100px] text-left text-xs font-mono text-amber-600">
           {transcript || 'Click start or new prompt to test spontaneous agility...'}
         </div>
 
         {!isRecording ? (
-          <Button size="lg" onClick={handleStartRecording} className="px-8 py-3.5 h-auto rounded-xl bg-amber-500 text-surface-950 font-bold hover:bg-amber-400">
+          <Button size="lg" onClick={handleStartRecording} className="px-8 py-3.5 h-auto rounded-xl bg-amber-500 text-slate-900 font-bold hover:bg-amber-400">
             Start Spontaneous Answer
           </Button>
         ) : (
