@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import type { Session, Utterance, TrainingMode } from '../../types';
 import { evaluateSession } from '../../services/aiCoachService';
+import { Button } from '../ui/button';
+import { Input } from '../ui/input';
 import { MessageSquare, Send } from 'lucide-react';
 
 interface Props {
@@ -91,12 +93,12 @@ export const ConversationMode: React.FC<Props> = ({ onSessionComplete }) => {
           <h2 className="text-2xl font-extrabold text-white mt-1">Natural Conversational Flow Partner</h2>
         </div>
 
-        <button
+        <Button
           onClick={handleFinishConversation}
-          className="px-4 py-2 rounded-xl bg-emerald-500 text-surface-950 font-bold text-xs hover:bg-emerald-400"
+          className="gap-2 rounded-xl bg-emerald-500 text-surface-950 font-bold text-xs hover:bg-emerald-400 shrink-0"
         >
           End & Get Analysis
-        </button>
+        </Button>
       </div>
 
       {/* Utterances Chat View */}
@@ -123,21 +125,22 @@ export const ConversationMode: React.FC<Props> = ({ onSessionComplete }) => {
       </div>
 
       {/* Input Box */}
-      <div className="flex items-center space-x-2">
-        <input
+      <div className="flex items-center gap-2">
+        <Input
           type="text"
           placeholder="Type or speak your conversational response..."
           value={currentText}
           onChange={(e) => setCurrentText(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleSendSpeech()}
-          className="flex-1 bg-surface-900 border border-white/10 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500"
+          className="flex-1 h-11 rounded-xl bg-surface-900 border-white/10 text-sm text-white placeholder:text-slate-400"
         />
-        <button
+        <Button
+          size="icon"
           onClick={handleSendSpeech}
-          className="p-3.5 rounded-xl bg-emerald-500 text-surface-950 font-bold hover:bg-emerald-400"
+          className="h-11 w-11 rounded-xl bg-emerald-500 text-surface-950 font-bold hover:bg-emerald-400"
         >
           <Send className="w-5 h-5" />
-        </button>
+        </Button>
       </div>
     </div>
   );

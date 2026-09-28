@@ -19,6 +19,8 @@ import { GitHubHeatmap } from './components/analytics/GitHubHeatmap';
 import { MonthlyJourney } from './components/analytics/MonthlyJourney';
 import { PersonalProfile } from './components/analytics/PersonalProfile';
 import { StoryBank } from './components/storybank/StoryBank';
+import { Skeleton } from './components/ui/skeleton';
+import { Spinner } from './components/ui/spinner';
 
 export const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ActiveTab>('DASHBOARD');
@@ -93,11 +95,18 @@ export const App: React.FC = () => {
   if (!profile) {
     return (
       <div className="min-h-screen bg-surface-950 text-white flex items-center justify-center">
-        <div className="text-center space-y-3">
-          <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mx-auto animate-spin">
-            💎
+        <div className="w-full max-w-sm space-y-4">
+          <div className="flex items-center justify-center gap-2 text-emerald-400">
+            <Spinner className="size-5" />
+            <p className="text-sm text-slate-400 font-bold">Loading Personal AI Communication Agent...</p>
           </div>
-          <p className="text-sm text-slate-400 font-bold">Loading Personal AI Communication Agent...</p>
+          <Skeleton className="h-9 w-full" />
+          <Skeleton className="h-24 w-full" />
+          <div className="grid grid-cols-3 gap-3">
+            <Skeleton className="h-20 w-full" />
+            <Skeleton className="h-20 w-full" />
+            <Skeleton className="h-20 w-full" />
+          </div>
         </div>
       </div>
     );

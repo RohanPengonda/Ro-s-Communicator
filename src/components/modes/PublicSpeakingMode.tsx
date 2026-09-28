@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import type { Session, TrainingMode } from '../../types';
 import { SpeechTracker } from '../../services/speechService';
 import { evaluateSession } from '../../services/aiCoachService';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 import { Users } from 'lucide-react';
 
 interface Props {
@@ -86,9 +88,9 @@ export const PublicSpeakingMode: React.FC<Props> = ({ onSessionComplete }) => {
           <h2 className="text-2xl font-extrabold text-white mt-1">Presentation & Audience Pacing</h2>
         </div>
 
-        <div className="bg-cyan-500/10 border border-cyan-500/30 px-3 py-1.5 rounded-full text-xs font-bold text-cyan-300">
+        <Badge className="bg-cyan-500/10 text-cyan-300 border-cyan-500/30 rounded-full shrink-0">
           Audience State: {audienceReaction}
-        </div>
+        </Badge>
       </div>
 
       <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-4">
@@ -111,13 +113,13 @@ export const PublicSpeakingMode: React.FC<Props> = ({ onSessionComplete }) => {
         </div>
 
         {!isRecording ? (
-          <button onClick={handleStart} className="px-8 py-3.5 rounded-xl bg-cyan-500 text-surface-950 font-bold hover:bg-cyan-400">
+          <Button size="lg" onClick={handleStart} className="px-8 py-3.5 h-auto rounded-xl bg-cyan-500 text-surface-950 font-bold hover:bg-cyan-400">
             Start Speech
-          </button>
+          </Button>
         ) : (
-          <button onClick={handleStop} className="px-8 py-3.5 rounded-xl bg-rose-500 text-white font-bold animate-pulse">
+          <Button size="lg" onClick={handleStop} className="px-8 py-3.5 h-auto rounded-xl bg-rose-500 text-white font-bold animate-pulse">
             Finish Speech & Evaluate
-          </button>
+          </Button>
         )}
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import type { Session, TrainingMode } from '../../types';
 import { SpeechTracker } from '../../services/speechService';
 import { evaluateSession } from '../../services/aiCoachService';
+import { Button } from '../ui/button';
 import { Award } from 'lucide-react';
 
 interface Props {
@@ -115,13 +116,13 @@ export const InterviewMode: React.FC<Props> = ({ onSessionComplete }) => {
         </div>
 
         {!isRecording ? (
-          <button onClick={handleStart} className="px-8 py-3.5 rounded-xl bg-emerald-500 text-surface-950 font-bold hover:bg-emerald-400">
+          <Button size="lg" onClick={handleStart} className="px-8 py-3.5 h-auto rounded-xl bg-emerald-500 text-surface-950 font-bold hover:bg-emerald-400">
             Start Answer
-          </button>
+          </Button>
         ) : (
-          <button onClick={handleStop} className="px-8 py-3.5 rounded-xl bg-rose-500 text-white font-bold animate-pulse">
+          <Button size="lg" onClick={handleStop} className="px-8 py-3.5 h-auto rounded-xl bg-rose-500 text-white font-bold animate-pulse">
             Submit Answer & Evaluate
-          </button>
+          </Button>
         )}
       </div>
     </div>

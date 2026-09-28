@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import type { Session, TrainingMode } from '../../types';
 import { SpeechTracker } from '../../services/speechService';
 import { evaluateSession } from '../../services/aiCoachService';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 import { Video, Mic, Square, Sparkles, Activity, AlertCircle, Eye } from 'lucide-react';
 
 interface LiveCoachModeProps {
@@ -194,24 +196,24 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
             <div className="absolute top-6 left-6 right-6 flex items-center justify-between pointer-events-none">
               
               {/* Pace Pill */}
-              <div className="bg-surface-950/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-xs font-bold text-emerald-400 flex items-center space-x-1.5">
+              <Badge className="bg-surface-950/80 text-emerald-400 border-white/10 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5">
                 <Activity className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Pace: {paceWpm || 140} WPM</span>
-              </div>
+                Pace: {paceWpm || 140} WPM
+              </Badge>
 
               {/* Filler Alert Pill */}
               {fillerCount > 0 && (
-                <div className="bg-rose-950/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-rose-500/40 text-xs font-bold text-rose-300 flex items-center space-x-1.5 animate-bounce">
+                <Badge className="bg-rose-950/90 text-rose-300 border-rose-500/40 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5 animate-bounce">
                   <AlertCircle className="w-3.5 h-3.5 text-rose-400" />
-                  <span>Filler Spike: "{lastFiller}" ({fillerCount})</span>
-                </div>
+                  Filler Spike: "{lastFiller}" ({fillerCount})
+                </Badge>
               )}
 
               {/* Eye Contact Indicator */}
-              <div className="bg-surface-950/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 text-xs font-bold text-cyan-300 flex items-center space-x-1.5">
+              <Badge className="bg-surface-950/80 text-cyan-300 border-white/10 rounded-full px-3 py-1.5 text-xs font-bold gap-1.5">
                 <Eye className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Lens Engagement: Good</span>
-              </div>
+                Lens Engagement: Good
+              </Badge>
             </div>
           )}
         </div>
@@ -265,22 +267,24 @@ export const LiveCoachMode: React.FC<LiveCoachModeProps> = ({
           {/* Action Control Button */}
           <div>
             {!isRecording ? (
-              <button
+              <Button
+                size="lg"
                 onClick={handleStartRecording}
                 disabled={isAnalyzing}
-                className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-surface-950 font-extrabold text-base shadow-xl shadow-emerald-500/25 transition-all flex items-center justify-center space-x-2"
+                className="gap-2 w-full py-4 h-auto rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-surface-950 font-extrabold text-base shadow-xl shadow-emerald-500/25 transition-all"
               >
                 <Mic className="w-5 h-5" />
-                <span>Start Live Session</span>
-              </button>
+                Start Live Session
+              </Button>
             ) : (
-              <button
+              <Button
+                size="lg"
                 onClick={handleStopRecording}
-                className="w-full py-4 rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-extrabold text-base shadow-xl shadow-rose-500/30 transition-all flex items-center justify-center space-x-2 animate-pulse"
+                className="gap-2 w-full py-4 h-auto rounded-xl bg-rose-500 hover:bg-rose-400 text-white font-extrabold text-base shadow-xl shadow-rose-500/30 transition-all animate-pulse"
               >
                 <Square className="w-5 h-5" />
-                <span>Stop & Generate Audit</span>
-              </button>
+                Stop & Generate Audit
+              </Button>
             )}
 
             {isAnalyzing && (

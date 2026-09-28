@@ -3,6 +3,7 @@ import type { DailyWorkout, Session } from '../../types';
 import { StorytellingMode } from './StorytellingMode';
 import { ExplainSimplyMode } from './ExplainSimplyMode';
 import { SpontaneousChallengeMode } from './SpontaneousChallengeMode';
+import { Badge } from '../ui/badge';
 import { Flame, CheckCircle2 } from 'lucide-react';
 
 interface Props {
@@ -92,11 +93,11 @@ export const DailyWorkoutMode: React.FC<Props> = ({ onWorkoutComplete, onSession
         </div>
 
         {/* Step Progress Pills */}
-        <div className="flex items-center space-x-2 bg-surface-900/80 p-2.5 rounded-xl border border-white/10">
+        <div className="flex items-center gap-2 bg-surface-900/80 p-2.5 rounded-xl border border-white/10 shrink-0">
           {workout.steps.map((step, idx) => (
-            <div
+            <Badge
               key={step.stepNumber}
-              className={`flex items-center space-x-1.5 px-3 py-1 rounded-lg text-xs font-bold ${
+              className={`gap-1.5 px-3 py-1 rounded-lg text-xs font-bold ${
                 step.completed
                   ? 'bg-emerald-500 text-surface-950'
                   : idx === workout.currentStepIndex
@@ -105,7 +106,7 @@ export const DailyWorkoutMode: React.FC<Props> = ({ onWorkoutComplete, onSession
               }`}
             >
               {step.completed ? <CheckCircle2 className="w-3.5 h-3.5" /> : <span>Step {step.stepNumber}</span>}
-            </div>
+            </Badge>
           ))}
         </div>
       </div>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import type { Session, TrainingMode } from '../../types';
 import { SpeechTracker } from '../../services/speechService';
 import { evaluateSession } from '../../services/aiCoachService';
+import { Button } from '../ui/button';
 import { Zap, RefreshCw } from 'lucide-react';
 
 interface Props {
@@ -107,13 +108,15 @@ export const SpontaneousChallengeMode: React.FC<Props> = ({ onSessionComplete })
           <h2 className="text-2xl font-extrabold text-white mt-1">Rapid-Fire Surprise Challenges</h2>
         </div>
 
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={handleSurpriseMe}
-          className="flex items-center space-x-2 px-4 py-2 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-bold hover:bg-amber-500/30"
+          className="gap-2 rounded-xl bg-amber-500/20 text-amber-300 border-amber-500/30 text-xs font-bold hover:bg-amber-500/30 hover:text-amber-200 shrink-0"
         >
           <RefreshCw className="w-4 h-4" />
-          <span>New Random Prompt</span>
-        </button>
+          New Random Prompt
+        </Button>
       </div>
 
       {/* Surprise Prompt Card */}
@@ -140,13 +143,13 @@ export const SpontaneousChallengeMode: React.FC<Props> = ({ onSessionComplete })
         </div>
 
         {!isRecording ? (
-          <button onClick={handleStartRecording} className="px-8 py-3.5 rounded-xl bg-amber-500 text-surface-950 font-bold hover:bg-amber-400">
+          <Button size="lg" onClick={handleStartRecording} className="px-8 py-3.5 h-auto rounded-xl bg-amber-500 text-surface-950 font-bold hover:bg-amber-400">
             Start Spontaneous Answer
-          </button>
+          </Button>
         ) : (
-          <button onClick={handleStop} className="px-8 py-3.5 rounded-xl bg-rose-500 text-white font-bold animate-pulse">
+          <Button size="lg" onClick={handleStop} className="px-8 py-3.5 h-auto rounded-xl bg-rose-500 text-white font-bold animate-pulse">
             Finish & Evaluate
-          </button>
+          </Button>
         )}
       </div>
     </div>

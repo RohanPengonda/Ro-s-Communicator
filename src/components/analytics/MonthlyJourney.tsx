@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import type { MonthlyReport } from '../../types';
+import { Card } from '../ui/card';
+import { Badge } from '../ui/badge';
+import { Button } from '../ui/button';
+import { Progress, ProgressIndicator } from '../ui/progress';
+import { Separator } from '../ui/separator';
 import { TrendingUp, ArrowUpRight, CheckCircle2, AlertTriangle, Sparkles, Target } from 'lucide-react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 
@@ -27,11 +32,11 @@ export const MonthlyJourney: React.FC<MonthlyJourneyProps> = ({ reports }) => {
       {/* Header Summary Banner */}
       <div className="glass-card-accent p-6 rounded-2xl border border-emerald-500/30 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-          <div className="flex items-center space-x-2 text-emerald-400 font-bold text-sm uppercase tracking-wider">
-            <TrendingUp className="w-4 h-4" />
-            <span>Monthly Communication Journey</span>
-          </div>
-          <h2 className="text-2xl lg:text-3xl font-extrabold text-white mt-1">
+          <Badge className="mb-3 bg-emerald-500/15 text-emerald-300 border-emerald-500/30 rounded-full gap-1.5">
+            <TrendingUp className="w-3.5 h-3.5" />
+            Monthly Communication Journey
+          </Badge>
+          <h2 className="text-2xl lg:text-3xl font-extrabold text-white">
             + {totalGrowth} Points Long-Term Transformation
           </h2>
           <p className="text-sm text-slate-300 mt-1 max-w-2xl">
@@ -39,14 +44,14 @@ export const MonthlyJourney: React.FC<MonthlyJourneyProps> = ({ reports }) => {
           </p>
         </div>
 
-        <div className="flex items-center space-x-4 bg-surface-900/80 p-4 rounded-xl border border-white/10 shrink-0">
+        <div className="flex items-center gap-4 bg-surface-900/80 p-4 rounded-xl border border-white/10 shrink-0">
           <div>
             <span className="text-xs text-slate-400 font-semibold uppercase">Current Level</span>
             <div className="text-3xl font-extrabold text-emerald-400 mt-0.5">
               {latest?.overallScore.toFixed(1)} <span className="text-sm text-slate-400 font-normal">/ 10</span>
             </div>
           </div>
-          <div className="h-10 w-px bg-white/10" />
+          <Separator orientation="vertical" className="h-10 bg-white/10" />
           <div>
             <span className="text-xs text-slate-400 font-semibold uppercase">Starting Level</span>
             <div className="text-2xl font-bold text-slate-400 mt-0.5">
@@ -57,7 +62,7 @@ export const MonthlyJourney: React.FC<MonthlyJourneyProps> = ({ reports }) => {
       </div>
 
       {/* Main Chart Card */}
-      <div className="glass-panel p-6 rounded-2xl border border-white/10">
+      <Card className="p-6 rounded-2xl border-white/10 gap-4">
         <h3 className="text-lg font-bold text-white mb-4">Overall Score Trajectory (Months 1 - 5+)</h3>
         <div className="h-64 w-full">
           <ResponsiveContainer width="100%" height="100%">
@@ -84,65 +89,62 @@ export const MonthlyJourney: React.FC<MonthlyJourneyProps> = ({ reports }) => {
             </AreaChart>
           </ResponsiveContainer>
         </div>
-      </div>
+      </Card>
 
       {/* Month Selection Buttons */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
         {reports.map((r) => (
-          <button
+          <Button
             key={r.yearMonth}
+            variant="outline"
             onClick={() => setSelectedMonth(r)}
-            className={`p-4 rounded-xl border text-left transition-all ${
+            className={`h-auto flex-col items-start gap-2 p-4 rounded-xl border text-left transition-all ${
               selectedMonth.yearMonth === r.yearMonth
                 ? 'bg-emerald-500/20 border-emerald-500 text-white shadow-lg shadow-emerald-500/10 scale-105'
                 : 'bg-surface-900/60 border-white/5 text-slate-400 hover:text-white hover:bg-white/5'
             }`}
           >
             <span className="text-xs uppercase font-semibold text-slate-400 block">{r.monthName}</span>
-            <div className="flex items-center justify-between mt-2">
+            <span className="flex items-center justify-between w-full gap-2">
               <span className="text-xl font-bold text-white">{r.overallScore.toFixed(1)}</span>
               {r.scoreChange > 0 && (
                 <span className="text-xs font-bold text-emerald-400 flex items-center bg-emerald-500/20 px-1.5 py-0.5 rounded">
                   <ArrowUpRight className="w-3 h-3 mr-0.5" /> +{r.scoreChange}
                 </span>
               )}
-            </div>
-          </button>
+            </span>
+          </Button>
         ))}
       </div>
 
       {/* Month Deep Diagnostic Report */}
       {selectedMonth && (
-        <div className="glass-panel p-6 rounded-2xl border border-white/10 space-y-6">
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+        <Card className="p-6 rounded-2xl border-white/10 gap-6">
+          <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
             <div>
               <h3 className="text-xl font-extrabold text-white">{selectedMonth.monthName} Report</h3>
               <p className="text-xs text-slate-400">Detailed communication audit for {selectedMonth.monthName}</p>
             </div>
-            <div className="px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-extrabold text-lg">
+            <Badge className="px-4 py-2 rounded-xl bg-emerald-500/10 text-emerald-400 border-emerald-500/30 text-lg font-extrabold">
               {selectedMonth.overallScore.toFixed(1)} / 10
-            </div>
+            </Badge>
           </div>
 
           {/* Category Scores Grid */}
-          <div>
-            <h4 className="text-xs uppercase font-bold text-slate-400 tracking-wider mb-3">Skill Category Progression</h4>
+          <div className="space-y-3">
+            <h4 className="text-xs uppercase font-bold text-slate-400 tracking-wider">Skill Category Progression</h4>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {selectedMonth.categoryScores.map((cat) => (
-                <div key={cat.category} className="bg-surface-900/80 p-3.5 rounded-xl border border-white/5">
-                  <span className="text-xs font-semibold text-slate-400 block">{cat.category}</span>
-                  <div className="flex items-baseline justify-between mt-1">
-                    <span className="text-xl font-bold text-white">{cat.score.toFixed(1)}</span>
-                    {cat.change > 0 && (
-                      <span className="text-[11px] font-semibold text-emerald-400">+{cat.change}</span>
-                    )}
+                <div key={cat.category} className="bg-surface-900/80 p-3.5 rounded-xl border border-white/5 flex flex-col gap-1.5">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span className="text-xs font-semibold text-slate-400 block truncate">{cat.category}</span>
+                    <span className="text-[11px] font-semibold text-emerald-400 shrink-0">
+                      {cat.score.toFixed(1)}{cat.change > 0 && ` (+${cat.change})`}
+                    </span>
                   </div>
-                  <div className="w-full bg-slate-800 h-1.5 rounded-full mt-2 overflow-hidden">
-                    <div 
-                      className="bg-emerald-400 h-full rounded-full" 
-                      style={{ width: `${(cat.score / 10) * 100}%` }}
-                    />
-                  </div>
+                  <Progress value={cat.score * 10} className="flex-wrap">
+                    <ProgressIndicator className="bg-emerald-400" />
+                  </Progress>
                 </div>
               ))}
             </div>
@@ -151,38 +153,38 @@ export const MonthlyJourney: React.FC<MonthlyJourneyProps> = ({ reports }) => {
           {/* Qualitative Insights */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-emerald-500/10 p-4 rounded-xl border border-emerald-500/20">
-              <div className="flex items-center space-x-2 text-emerald-400 font-bold text-sm mb-1">
+              <div className="flex items-center gap-2 text-emerald-400 font-bold text-sm mb-1">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Biggest Improvement</span>
+                Biggest Improvement
               </div>
               <p className="text-slate-200 text-sm font-medium">{selectedMonth.biggestImprovement}</p>
             </div>
 
             <div className="bg-rose-500/10 p-4 rounded-xl border border-rose-500/20">
-              <div className="flex items-center space-x-2 text-rose-400 font-bold text-sm mb-1">
+              <div className="flex items-center gap-2 text-rose-400 font-bold text-sm mb-1">
                 <AlertTriangle className="w-4 h-4" />
-                <span>Biggest Remaining Weakness</span>
+                Biggest Remaining Weakness
               </div>
               <p className="text-slate-200 text-sm font-medium">{selectedMonth.biggestWeakness}</p>
             </div>
 
             <div className="bg-amber-500/10 p-4 rounded-xl border border-amber-500/20">
-              <div className="flex items-center space-x-2 text-amber-400 font-bold text-sm mb-1">
+              <div className="flex items-center gap-2 text-amber-400 font-bold text-sm mb-1">
                 <Sparkles className="w-4 h-4" />
-                <span>Recurring Habit Identified</span>
+                Recurring Habit Identified
               </div>
               <p className="text-slate-200 text-sm font-medium">{selectedMonth.recurringHabit}</p>
             </div>
 
             <div className="bg-cyan-500/10 p-4 rounded-xl border border-cyan-500/20">
-              <div className="flex items-center space-x-2 text-cyan-400 font-bold text-sm mb-1">
+              <div className="flex items-center gap-2 text-cyan-400 font-bold text-sm mb-1">
                 <Target className="w-4 h-4" />
-                <span>Focus for Next Month</span>
+                Focus for Next Month
               </div>
               <p className="text-slate-200 text-sm font-medium">{selectedMonth.nextMonthFocus}</p>
             </div>
           </div>
-        </div>
+        </Card>
       )}
 
     </div>

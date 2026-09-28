@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import type { Session, TrainingMode } from '../../types';
 import { SpeechTracker } from '../../services/speechService';
 import { evaluateSession } from '../../services/aiCoachService';
+import { Button } from '../ui/button';
+import { Badge } from '../ui/badge';
 import { BookOpen } from 'lucide-react';
 
 interface StorytellingModeProps {
@@ -115,9 +117,9 @@ export const StorytellingMode: React.FC<StorytellingModeProps> = ({
         </div>
 
         {previousAttemptSession && (
-          <span className="bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 text-xs font-bold px-3 py-1.5 rounded-full">
+          <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 rounded-full shrink-0">
             Retry Attempt #{previousAttemptSession.attemptNumber + 1}
-          </span>
+          </Badge>
         )}
       </div>
 
@@ -154,20 +156,22 @@ export const StorytellingMode: React.FC<StorytellingModeProps> = ({
         </div>
 
         {!isRecording ? (
-          <button
+          <Button
+            size="lg"
             onClick={handleStart}
             disabled={isAnalyzing}
-            className="px-8 py-3.5 rounded-xl bg-emerald-500 text-surface-950 font-extrabold text-base shadow-lg hover:bg-emerald-400 transition-all"
+            className="px-8 py-3.5 h-auto rounded-xl bg-emerald-500 text-surface-950 font-extrabold text-base shadow-lg hover:bg-emerald-400 transition-all"
           >
             Start Story Recording
-          </button>
+          </Button>
         ) : (
-          <button
+          <Button
+            size="lg"
             onClick={handleStop}
-            className="px-8 py-3.5 rounded-xl bg-rose-500 text-white font-extrabold text-base shadow-lg hover:bg-rose-400 transition-all animate-pulse"
+            className="px-8 py-3.5 h-auto rounded-xl bg-rose-500 text-white font-extrabold text-base shadow-lg hover:bg-rose-400 transition-all animate-pulse"
           >
             Finish Story & Evaluate
-          </button>
+          </Button>
         )}
       </div>
 
