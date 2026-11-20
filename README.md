@@ -143,10 +143,6 @@ PORT=3001
 | `PORT` | No | `server/index.ts:9` | Backend port. Defaults to `3001`. Loaded by `dotenv.config()` at `server/index.ts:6`. |
 | `GEMINI_API_KEY` | No | — | **Unused.** The `process.env` fallback in `aiCoachService.ts:12` is guarded by `typeof process !== 'undefined'`, which is always false in a browser bundle, so it resolves to `''`. The Express server never reads it. |
 
-> ⚠️ **Security note:** because Gemini is called from the browser, `VITE_GEMINI_API_KEY` is shipped
-> in cleartext in the client bundle. That is acceptable only for a local, single-user tool. For a
-> deployed app, move the `@google/genai` call into `server/` and proxy it through an API route.
-
 ### Secret handling
 
 `.gitignore` excludes `.env`, every other `.env.*` variant, and the SQLite database files. Only
